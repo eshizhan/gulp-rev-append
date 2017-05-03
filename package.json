@@ -1,7 +1,7 @@
 {
   "name": "gulp-rev-append-opt",
-  "version": "0.1.8",
-  "description": "gulp-rev-append with the option of field name.",
+  "version": "0.2.1",
+  "description": "gulp-rev-append with the option of field name and md5 digest length.",
   "main": "index.js",
   "repository": {
     "type": "git",

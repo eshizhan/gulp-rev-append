@@ -1,18 +1,34 @@
 gulp-rev-append-opt
 ---
-> gulp-rev-append with the option of field name.
+
+[![Build Status](https://travis-ci.org/eshizhan/gulp-rev-append-opt.svg?branch=master)](https://travis-ci.org/eshizhan/gulp-rev-append-opt)
+
+> gulp-rev-append with the option of field name and md5 digest length.
+
 ```
 <script src="script/script-one.js?v=@@hash"></script>
 ```
 ```
-rev({ fieldName: 'v' })
+$ npm install gulp-rev-append-opt --save-dev
 ```
+```
+var rev = require('gulp-rev-append-opt');
 
+gulp.task('rev', function() {
+  gulp.src('./index.html')
+    .pipe(rev({ fieldName: 'v', digestLength: 8 }))
+    .pipe(gulp.dest('.'));
+});
+```
+default value: fieldName='rev', digestLength=16
+
+Original README
+--
 gulp-rev-append
 ---
 > gulp plugin for cache-busting files using query string file hash
 
-[![Build Status](https://travis-ci.org/eshizhan/gulp-rev-append-opt.svg?branch=master)](https://travis-ci.org/eshizhan/gulp-rev-append-opt)
+[![Build Status](https://travis-ci.org/bustardcelly/gulp-rev-append.png?branch=master)](https://travis-ci.org/bustardcelly/gulp-rev-append)
 
 installation
 ---

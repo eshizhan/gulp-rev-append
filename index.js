@@ -10,8 +10,12 @@ var map = require('event-stream').map;
 var revPlugin = function revPlugin(opt) {
   
   var FILE_DECL = /(?:href=|src=|url\()['|"]([^\s>"']+?)\?rev=([^\s>"']+?)['|"]/gi;
+  var DIGEST_LEN = 16;
   if(opt && opt.fieldName) {
     FILE_DECL = new RegExp('(?:href=|src=|url\\()[\'|"]([^\\s>"\']+?)\\?' + opt.fieldName + '=([^\\s>"\']+?)[\'|"]', 'gi');
+  }
+  if(opt && opt.digestLength && opt.digestLength > 0) {
+    DIGEST_LEN = opt.digestLength;
   }
 
   return map(function(file, cb) {
@@ -57,7 +61,7 @@ var revPlugin = function revPlugin(opt) {
               data = fs.readFileSync(dependencyPath);
               hash = crypto.createHash('md5');
               hash.update(data.toString(), 'utf8');
-              line = line.replace(groups[2], hash.digest('hex'));
+              line = line.replace(groups[2], hash.digest('hex').slice(0, DIGEST_LEN));
             }
             catch(e) {
               // fail silently.
