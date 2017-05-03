@@ -6,9 +6,13 @@ var gutil = require('gulp-util');
 var PluginError = gutil.PluginError;
 var map = require('event-stream').map;
 
-var FILE_DECL = /(?:href=|src=|url\()['|"]([^\s>"']+?)\?rev=([^\s>"']+?)['|"]/gi;
 
-var revPlugin = function revPlugin() {
+var revPlugin = function revPlugin(opt) {
+  
+  var FILE_DECL = /(?:href=|src=|url\()['|"]([^\s>"']+?)\?rev=([^\s>"']+?)['|"]/gi;
+  if(opt && opt.fieldName) {
+    FILE_DECL = new RegExp('(?:href=|src=|url\\()[\'|"]([^\\s>"\']+?)\\?' + opt.fieldName + '=([^\\s>"\']+?)[\'|"]', 'gi');
+  }
 
   return map(function(file, cb) {
 
@@ -22,11 +26,11 @@ var revPlugin = function revPlugin() {
     var data, hash;
 
     if(!file) {
-      throw new PluginError('gulp-rev-append', 'Missing file option for gulp-rev-append.');
+      throw new PluginError('gulp-rev-append-opt', 'Missing file option for gulp-rev-append-opt.');
     }
 
     if(!file.contents) {
-      throw new PluginError('gulp-rev-append', 'Missing file.contents required for modifying files using gulp-rev-append.');
+      throw new PluginError('gulp-rev-append-opt', 'Missing file.contents required for modifying files using gulp-rev-append-opt.');
     }
 
     contents = file.contents.toString();

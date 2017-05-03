@@ -1,8 +1,18 @@
+gulp-rev-append-opt
+---
+> gulp-rev-append with the option of field name.
+```
+<script src="script/script-one.js?v=@@hash"></script>
+```
+```
+rev({ fieldName: 'v' })
+```
+
 gulp-rev-append
 ---
 > gulp plugin for cache-busting files using query string file hash
 
-[![Build Status](https://travis-ci.org/bustardcelly/gulp-rev-append.png?branch=master)](https://travis-ci.org/bustardcelly/gulp-rev-append)
+[![Build Status](https://travis-ci.org/eshizhan/gulp-rev-append-opt.svg?branch=master)](https://travis-ci.org/eshizhan/gulp-rev-append-opt)
 
 installation
 ---
